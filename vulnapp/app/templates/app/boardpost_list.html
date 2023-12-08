@@ -1,0 +1,22 @@
+<!-- templates/yourapp/your_model_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Board site</title>
+</head>
+<body>
+    <h2>Board Posts</h2>
+    
+    <a href="{% url 'message-post' %}">Create new post</a>
+
+    <!-- Display the list of objects -->
+    <ul>
+        {% for object in object_list %}
+            <img src="{{ object.image }}" alt="">
+            <p>{{ object.content }}</p>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>
