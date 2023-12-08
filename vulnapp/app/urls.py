@@ -7,5 +7,5 @@ urlpatterns = [
     path('', BoardPostsListView.as_view(), name='main'),
     path('create/', BoardPostsCreateView.as_view(), name='message-post'),
     path('delete/<int:pk>', BoardPostsDeleteView.as_view(), name='message-delete'),
-    path('user_uploads/<str:file_name>/', read_file_view, name='user-content-serve'),
+    path('user_uploads/<str:file_name>', read_file_view, name='user-content-serve'),
 ]

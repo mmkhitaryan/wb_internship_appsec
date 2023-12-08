@@ -38,6 +38,10 @@ class BoardPostsDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("main")
 
 def read_file_view(request, file_name):
+    image_found_in_db = BoardPost.objects.filter(image='user_uploads/'+file_name).first()
+    if not image_found_in_db:
+        return HttpResponse("Filename not allowed", status=403)
+
     # Assuming the files are stored in a specific directory, adjust the path accordingly
     file_path = os.path.join('user_uploads/', file_name)
 
