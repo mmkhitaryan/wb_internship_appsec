@@ -37,6 +37,12 @@ class BoardPostsDeleteView(LoginRequiredMixin, DeleteView):
     model = BoardPost
     success_url = reverse_lazy("main")
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.owner != self.request.user:
+            raise HttpResponse("You are not the owner", status=403)
+        return super().dispatch(request, *args, **kwargs)
+
 def read_file_view(request, file_name):
     image_found_in_db = BoardPost.objects.filter(image='user_uploads/'+file_name).first()
     if not image_found_in_db:
