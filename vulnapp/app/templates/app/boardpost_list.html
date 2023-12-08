@@ -12,8 +12,13 @@
     <!-- Display the list of objects -->
     <ul>
         {% for object in object_list %}
-            <img src="{{ object.image }}" alt="">
+            <img src="{{ object.image }}" width="200" alt="">
             <p>{{ object.content }}</p>
+
+            <form action="{% url 'message-delete' pk=object.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
         {% endfor %}
     </ul>
 

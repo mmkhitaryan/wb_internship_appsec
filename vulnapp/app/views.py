@@ -1,11 +1,13 @@
+import os
 # myapp/views.py
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.list import ListView
+from django.http import HttpResponse
 
 from .models import BoardPost
 
@@ -31,3 +33,26 @@ class BoardPostsCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+class BoardPostsDeleteView(LoginRequiredMixin, DeleteView):
+    model = BoardPost
+    success_url = reverse_lazy("main")
+
+def read_file_view(request, file_name):
+    # Assuming the files are stored in a specific directory, adjust the path accordingly
+    file_path = os.path.join('user_uploads/', file_name)
+
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        return HttpResponse("File not found", status=404)
+
+    # Open and read the file content
+    with open(file_path, 'rb') as file:
+        file_content = file.read()
+
+    # You can customize the response content type based on the file type
+    response = HttpResponse(file_content, content_type='text/plain')
+
+    # Optionally, you can set the Content-Disposition header to suggest a filename
+    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+
+    return response
