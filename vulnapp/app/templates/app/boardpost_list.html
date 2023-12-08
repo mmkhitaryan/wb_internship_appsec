@@ -16,7 +16,6 @@
             <p>{{ object.content }}</p>
 
             <form action="{% url 'message-delete' pk=object.pk %}" method="post">
-                {% csrf_token %}
                 <input type="submit" value="Delete">
             </form>
         {% endfor %}
