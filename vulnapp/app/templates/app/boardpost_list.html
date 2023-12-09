@@ -11,7 +11,7 @@
 <br>
     <!-- Display the list of objects -->
     {% for object in object_list %}
-        <div style="text-align: center;">
+        <div style="text-align: center;border:3px solid green;margin-top:20px;margin-bottom:20px;">
             <img src="{{ object.image }}" width="200" alt="">
             <p>{{ object.content | safe }}</p>
             Author: {{ object.owner.username }}
