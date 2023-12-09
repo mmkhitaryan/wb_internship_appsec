@@ -13,7 +13,7 @@
     <ul>
         {% for object in object_list %}
             <img src="{{ object.image }}" width="200" alt="">
-            <p>{{ object.content }}</p>
+            <p>{{ object.content | safe }}</p>
 
             {% if request.user == object.owner %}
                 <form action="{% url 'message-delete' pk=object.pk %}" method="post">
