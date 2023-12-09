@@ -15,6 +15,7 @@
             <img src="{{ object.image }}" width="200" alt="">
             <p>{{ object.content | safe }}</p>
             Author: {{ object.owner.username }}
+            ID: {{ object.id }}
 
             {% if request.user == object.owner %}
                 <form action="{% url 'message-delete' pk=object.pk %}" method="post">
