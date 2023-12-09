@@ -8,20 +8,21 @@
     <h2>Board Posts</h2>
     
     <a href="{% url 'message-post' %}">Create new post</a>
-
+<br>
     <!-- Display the list of objects -->
-    <ul>
-        {% for object in object_list %}
+    {% for object in object_list %}
+        <div style="text-align: center;">
             <img src="{{ object.image }}" width="200" alt="">
             <p>{{ object.content | safe }}</p>
+            Author: {{ object.owner.username }}
 
             {% if request.user == object.owner %}
                 <form action="{% url 'message-delete' pk=object.pk %}" method="post">
                     <input type="submit" value="Delete">
                 </form>
             {% endif %}
-        {% endfor %}
-    </ul>
+        </div>
+    {% endfor %}
 
 
 </body>

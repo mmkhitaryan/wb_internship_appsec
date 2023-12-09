@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0'
 ]
 LOGIN_REDIRECT_URL = '/'
-
+LOGIN_URL = '/login'
 # Application definition
 
 AUTHENTICATION_BACKENDS = [
